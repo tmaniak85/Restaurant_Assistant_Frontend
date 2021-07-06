@@ -1,0 +1,53 @@
+<header class="uk-heading-small uk-text">Przyjęte zamówienia</header>
+<table class="uk-table-striped uk-width uk-border">
+  <thead>
+  <tr>
+    <th class="uk-text-right" style="width: 3%">Id</th>
+    <th class="uk-text-center" style="width: 30%">Nazwa</th>
+    <th class="uk-text-center" style="width: 10%">Cena</th>
+    <th class="uk-text-center" style="width: 10%">Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let order of orders" style="counter-increment: rowNumber">
+    <td class="uk-text-right" scope="row"></td>
+    <td class="uk-text-center">{{order.menu.name}}</td>
+    <td class="uk-text-center">{{order.menu.price}}</td>
+    <td *ngIf="order.status === 'READY'" class="uk-text-center uk-alert-danger">{{order.status}}</td>
+    <td *ngIf="order.status === 'KITCHEN' || order.status === 'RELEASED'" class="uk-text-center">{{order.status}}</td>
+    <td>
+      <button *ngIf="order.status === 'READY' || order.status === 'KITCHEN'" class="uk-button-default uk-disabled uk-button uk-button-small uk-border-rounded uk-width">W TOKU</button>
+      <div (click)="setOrderStatusAsArchived(order.id)" *ngIf="order.status === 'RELEASED'" class="uk-button-primary uk-button uk-button-small uk-border-rounded uk-width">Zmień status</div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<header class="uk-heading-small uk-text">Menu</header>
+<table class="uk-table-striped uk-width uk-border">
+  <thead>
+  <tr>
+    <th class="uk-text-right" style="width: 3%">Id</th>
+    <th class="uk-text-center" style="width: 30%">Nazwa</th>
+    <th class="uk-text-center" style="width: 10%">Cena</th>
+    <th class="uk-text-center" style="width: 10%">Status</th>
+    <th class="uk-text-center" style="width: 10%">Akcja</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let dish of menu" style="counter-increment: rowNumber">
+    <td class="uk-text-right" scope="row"></td>
+    <td class="uk-text-center">{{dish.name}}</td>
+    <td class="uk-text-center">{{dish.price}}</td>
+    <td>
+      <div *ngIf="dish.status === true" class="uk-text-center">Dostępny</div>
+      <div *ngIf="dish.status === false" class="uk-text-center uk-background-default">Brak</div>
+    </td>
+    <td>
+      <button (click)="createOrder(this.dish); showOrdersForTable()" *ngIf="dish.status === true" class="uk-button-primary uk-button uk-button-small uk-border-rounded uk-width">Dodaj</button>
+      <button *ngIf="dish.status === false" class="uk-disabled uk-button uk-button-small uk-border-rounded uk-width">Dodaj</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div class="uk-background-default" style="height: 80px">
+</div>

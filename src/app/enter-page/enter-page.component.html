@@ -1,0 +1,10 @@
+<div class="uk-container-expand uk-height-viewport uk-flex-middle uk-flex-center uk-flex uk-width uk-position-fixed">
+  <div class="uk-container-small uk-background-blend-default uk-width-1-4">
+    <div class="uk-heading-small uk-heading-divider uk-head uk-text-center">Restaurant Assistant</div>
+    <div class="uk-margin">
+      <label class="uk-text">Jesteś zalogowany jako: {{user.username}}</label><br>
+      <label class="uk-text">Uprawnienia: {{user.userAuthority}}</label>
+    </div>
+    <div  (click)="goFurther(user.userAuthority)" class="uk-button-primary uk-button uk-button-small uk-border-rounded uk-align-center">Dalej</div>
+  </div>
+</div>

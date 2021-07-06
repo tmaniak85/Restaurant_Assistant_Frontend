@@ -1,0 +1,26 @@
+<div style="height: 100px">
+</div>
+<table class="uk-table-striped uk-width uk-border">
+  <thead>
+  <tr>
+    <th class="uk-text-right">Id</th>
+    <th class="uk-text-center">Nazwa</th>
+    <th class="uk-text-center">Cena</th>
+    <th class="uk-text-center">Kelner</th>
+    <th class="uk-text-center">Data przyjęcia</th>
+    <th class="uk-text-center">Akcja</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let order of orders" style="counter-increment: rowNumber">
+    <td class="uk-text-right" scope="row"></td>
+    <td class="uk-text-center">{{order.menu.name}}</td>
+    <td class="uk-text-center">{{order.menu.price}}</td>
+    <td class="uk-text-center">{{order.user.username}}</td>
+    <td class="uk-text-center">{{order.creationDateTime | date: 'yyyy-MM-dd ---- HH:mm'}}</td>
+    <td>
+      <button (click)="changeStatus(this.order.id)" class="uk-button-primary uk-button uk-button-small uk-border-rounded uk-width">Gotowe</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

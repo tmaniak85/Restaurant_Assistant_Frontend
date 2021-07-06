@@ -1,0 +1,48 @@
+<div style="height: 100px">
+</div>
+<table class="uk-table-striped uk-width">
+  <thead>
+  <tr>
+    <th class="uk-text-right">Id</th>
+    <th class="uk-text-center">Login</th>
+    <th>Hasło</th>
+    <th class="uk-text-center">Imię</th>
+    <th class="uk-text-center">Nazwisko</th>
+    <th class="uk-text-center">Stanowisko</th>
+    <th>Akcja</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let credential of credentials" style="counter-increment: rowNumber">
+    <td class="uk-text-right" scope="row"></td>
+    <td class="uk-text-center">{{credential.username}}</td>
+    <td>
+      <button routerLink="/MainPage/ADMIN/Pass/{{credential.id}}" class="uk-button-primary uk-button uk-button-small uk-border-rounded">Zmień hasło</button>
+    </td>
+    <td class="uk-text-center">{{credential.firstName}}</td>
+    <td class="uk-text-center">{{credential.lastName}}</td>
+    <td class="uk-text-center">{{credential.userAuthority}}</td>
+    <td>
+      <button (click)="deleteUser(credential.id)" class="uk-button-primary uk-button uk-button-small uk-border-rounded">Usuń konto</button>
+    </td>
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+    <td></td>
+    <td><input [(ngModel)]="credential.username" class="uk-input uk-border-rounded uk-margin" type="text"></td>
+    <td><input [(ngModel)]="credential.password" class="uk-input uk-border-rounded uk-margin" type="text"></td>
+    <td><input [(ngModel)]="credential.firstName" class="uk-input uk-border-rounded uk-margin" type="text"></td>
+    <td><input [(ngModel)]="credential.lastName" class="uk-input uk-border-rounded uk-margin" type="text"></td>
+    <td>
+      <select [(ngModel)]="credential.userAuthority" class="uk-select uk-border-rounded uk-margin">
+        <option>ADMIN</option>
+        <option>CHEF</option>
+        <option>WAITER</option>
+      </select>
+    </td>
+    <td><div (click)="registerUser()" class="uk-button-primary uk-button uk-button-small uk-border-rounded uk-align-center">Wprowadź</div></td>
+  </tr>
+  </tfoot>
+</table>
+

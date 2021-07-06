@@ -1,0 +1,42 @@
+<div style="height: 100px">
+</div>
+<table class="uk-table-striped uk-width">
+  <thead>
+    <tr>
+      <th class="uk-text-right">Id</th>
+      <th class="uk-text-center">Nazwa</th>
+      <th class="uk-text-center">Cena</th>
+      <th class="uk-text-center">Status</th>
+      <th class="uk-text-center">Akcja</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let dish of menu" style="counter-increment: rowNumber">
+    <td class="uk-text-right" scope="row"></td>
+    <td class="uk-text-center">{{dish.name}}</td>
+    <td class="uk-text-center">{{dish.price}}</td>
+    <td>
+      <button *ngIf="dish.status === true" (click)="updateDishCurrentStatus(dish.id)" class="uk-button-primary uk-button uk-button-small uk-border-rounded">Dostępny</button>
+      <button *ngIf="dish.status === false" (click)="updateDishCurrentStatus(dish.id)" class="uk-button-primary uk-button uk-button-small uk-border-rounded">Brak</button>
+    </td>
+    <td>
+      <button (click)="deleteDish(dish.id)" class="uk-button-primary uk-button uk-button-small uk-border-rounded">Usuń</button>
+    </td>
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+    <td></td>
+    <td><input [(ngModel)]="dish.name" class="uk-input uk-border-rounded uk-margin" type="text"></td>
+    <td><input [(ngModel)]="dish.price" class="uk-input uk-border-rounded uk-margin" type="text"></td>
+    <td>
+      <select [(ngModel)]="dish.status" class="uk-select uk-border-rounded uk-margin">
+        <option>true</option>
+        <option>false</option>
+      </select>
+    </td>
+    <td><div (click)="createDish()" class="uk-button-primary uk-button uk-button-small uk-border-rounded uk-align-center">Wprowadź</div></td>
+  </tr>
+  </tfoot>
+</table>
+

@@ -1,0 +1,30 @@
+<div style="height: 100px">
+</div>
+<table class="uk-table-striped uk-width">
+  <thead>
+  <tr>
+    <th class="uk-text-right">Id</th>
+    <th class="uk-text-center">Numer stolika</th>
+    <th class="uk-text-center">Ilość miejsc</th>
+    <th>Akcja</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="uk-text-right" *ngFor="let table of tables" style="counter-increment: rowNumber">
+    <td scope="row"></td>
+    <td class="uk-text-center">{{table.numberOfTable}}</td>
+    <td class="uk-text-center">{{table.numberOfSeats}}</td>
+    <td>
+      <button (click)="deleteTable(table.id)" class="uk-button-primary uk-button uk-button-small uk-border-rounded">Usuń stolik</button>
+    </td>
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+    <td></td>
+    <td><input [(ngModel)]="table.numberOfTable" class="uk-input uk-border-rounded uk-margin" type="text"></td>
+    <td><input [(ngModel)]="table.numberOfSeats" class="uk-input uk-border-rounded uk-margin" type="text"></td>
+    <td><div (click)="createTable()" class="uk-button-primary uk-button uk-button-small uk-border-rounded uk-align-center">Dodaj</div></td>
+  </tr>
+  </tfoot>
+</table>
