@@ -12,8 +12,6 @@ import {Tables} from '../../../domain/Tables';
   styleUrls: ['./dining-room-page.component.css']
 })
 export class DiningRoomPageComponent implements OnInit, OnDestroy {
-
-  constructor(private apiHttp: ApiHttpService, private router: Router, private activeRoute: ActivatedRoute) {}
   users: UserCredentials[] = [];
   user: UserCredentials = new UserCredentials();
   subscription: Subscription;
@@ -22,12 +20,15 @@ export class DiningRoomPageComponent implements OnInit, OnDestroy {
   table: Tables = new Tables();
   introducedTable: Tables = new Tables();
   introducedUser: UserCredentials = new UserCredentials();
+  noUserToTableError = false;
+  noTableToUserError = false;
 
+  constructor(private apiHttp: ApiHttpService, private router: Router, private activeRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.subscription = timer (0, 3000)
       .pipe(mergeMap(
-        () => this.apiHttp.showAvailableUsers()
+        () => this.apiHttp.showAvailableWaiters()
       )).subscribe(
         r => this.users = r);
     this.subscriptionSecond = timer (0, 3000)
@@ -40,25 +41,43 @@ export class DiningRoomPageComponent implements OnInit, OnDestroy {
   addTableId(table: Tables): void {
     this.introducedTable = table;
   }
+
   addUserId(user: UserCredentials): void {
     this.introducedUser = user;
   }
 
   addUserToTable(): void {
+    this.noUserToTableError = false;
+    this.noTableToUserError = false;
     this.apiHttp.addUserToTable(this.introducedTable, this.introducedUser).subscribe(
-      () => this.setTableWaiterAsNull()
+      () => this.setTableWaiterAsNull(),
+      e => {
+        if (e.error.validationErrorList != null) {
+          const errors = e.error.validationErrorList;
+          for (const error of errors) {
+            if (error.code === 'C002') {
+              this.noUserToTableError = true;
+            }
+          }
+        } else if (e.status === 400) {
+          this.noTableToUserError = true;
+        }
+      }
     );
   }
 
   setTableWaiterAsNull(): void {
-    this.introducedUser.username = null;
-    this.introducedTable.numberOfTable = null;
+    this.introducedUser = null;
+    this.introducedTable = null;
+    this.introducedUser = new UserCredentials();
+    this.introducedTable = new Tables();
   }
 
   logout(): void {
     this.apiHttp.logout();
     this.router.navigate(['']);
   }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
     this.subscriptionSecond.unsubscribe();

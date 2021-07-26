@@ -1,5 +1,3 @@
-import {Tables} from './Tables';
-
 export class UserCredentials {
   id: number;
   username: string;

@@ -11,6 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ChangePassPageComponent implements OnInit {
   id: number;
   user: UserCredentials = new UserCredentials();
+  passwordSizeError = false;
 
   constructor(private apiHttp: ApiHttpService, private router: Router, private activeRoute: ActivatedRoute) {
   }
@@ -24,9 +25,17 @@ export class ChangePassPageComponent implements OnInit {
   }
 
   changePassword(): void {
+    this.passwordSizeError = false;
     this.apiHttp.changePassword(this.id, this.user).subscribe(
-      () => this.router.navigateByUrl(`/MainPage/ADMIN/Register`)
+      () => this.router.navigateByUrl(`/MainPage/ADMIN/Register`),
+      e => {
+        const errors = e.error.validationErrorList;
+        for (const error of errors) {
+          if (error.code === 'C002' || error.code === 'C005') {
+            this.passwordSizeError = true;
+          }
+        }
+      }
     );
   }
-
 }

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UserCredentials} from '../domain/UserCredentials';
 import {ApiHttpService} from '../api-http.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-main-page',

@@ -1,14 +1,14 @@
 import {UserCredentials} from './UserCredentials';
 import {Menu} from './Menu';
-import Table = WebAssembly.Table;
 import {Tables} from './Tables';
-import DateTimeFormat = Intl.DateTimeFormat;
+import {Time} from '@angular/common';
 
 export class Order {
   id: number;
-  table: Tables;
+  tables: Tables;
   user: UserCredentials;
   menu: Menu;
-  creationDateTime: Date;
+  creationDate: Date;
+  creationTime: Time;
   status: string;
 }

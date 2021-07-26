@@ -1,6 +1,6 @@
 <div class="uk-flex uk-height-viewport">
   <div class="uk-width-5-6">
-    <div style="height: 100px"></div>
+    <div style="height: 80px"></div>
     <div class="uk-background-default uk-flex uk-flex-wrap uk-flex-row uk-flex-around uk-padding-small">
         <div *ngFor="let table of tables">
           <button class="button1" *ngIf="table.tableStatus === 'FREE'" (click)="addTableId(table)" class="uk-button-primary uk-border-rounded uk-margin-top uk-button-small uk-padding-small">
@@ -17,16 +17,26 @@
         </div>
     </div>
   </div>
-  <div class="uk-width-1-6 uk-position-fixed uk-position-right">
-    <div class="uk-overflow-auto uk-background-muted uk-height-viewport">
+  <div class="uk-width-1-6 uk-height uk-position-fixed uk-position-right">
+    <div class="uk-background-muted uk-height-viewport">
       <div style="height: 100px"></div>
       <div class="uk-background-secondary uk-light uk-text-left uk-padding-small">
         <label class="uk-text"><span class="uk-margin-small-right">Stolik: {{introducedTable.numberOfTable}}</span><br><span class="uk-margin-small-right">Kelner: {{introducedUser.username}}</span></label><br>
         <div (click)="addUserToTable()" class="uk-text-center uk-button-primary uk-button-small uk-border-rounded uk-margin-top">Deleguj zadanie</div>
       </div>
-      <ul class="uk-list uk-text-small uk-padding-small">
+      <div style="height: 20px" class="uk-width">
+        <div *ngIf="noUserToTableError" uk-alert class="uk-alert-danger">
+          <a class="uk-alert-close" uk-close></a>
+          <span class="uk-text-small uk-text-secondary">Wybierz kelnera</span>
+        </div>
+        <div *ngIf="noTableToUserError" uk-alert class="uk-alert-danger">
+          <a class="uk-alert-close" uk-close></a>
+          <span class="uk-text-small uk-text-secondary">Wybierz stolik</span>
+        </div>
+      </div>
+      <ul class="uk-list uk-text-small uk-padding-small uk-overflow-auto" style="height: 46vh">
         <li *ngFor="let user of users">
-          <div class="uk-background-default uk-width uk-text-left uk-border-rounded" *ngIf="user.userAuthority === 'WAITER'">
+          <div class="uk-background-default uk-width uk-text-left uk-border-rounded">
             <div routerLink="direct/{{user.id}}" class="uk-link-text uk-margin-left">
             <span class="user-icon uk-icon" uk-icon="user"></span>{{user.username}}
             </div><br>
@@ -41,3 +51,4 @@
     </div>
   </div>
 </div>
+<div style="height: 80px"></div>

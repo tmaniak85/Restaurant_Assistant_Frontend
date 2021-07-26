@@ -2,12 +2,13 @@
 <table class="uk-table-striped uk-width uk-border">
   <thead>
   <tr>
-    <th class="uk-text-right">Id</th>
-    <th class="uk-text-center">Nazwa</th>
-    <th class="uk-text-center">Cena</th>
-    <th class="uk-text-center">Status</th>
-    <th class="uk-text-center">Data przyjęcia</th>
-    <th class="uk-text-center">Akcja</th>
+    <th class="uk-text-right" style="width: 5em">Id</th>
+    <th class="uk-text-center" style="width: 40em">Nazwa</th>
+    <th class="uk-text-center" style="width: 5em">Cena</th>
+    <th class="uk-text-center" style="width: 10em">Status</th>
+    <th class="uk-text-center" style="width: 10em">Godzina przyjęcia</th>
+    <th class="uk-text-center" style="width: 5em">Stolik</th>
+    <th class="uk-text-center" style="width: 15em">Akcja</th>
   </tr>
   </thead>
   <tbody>
@@ -17,7 +18,8 @@
     <td class="uk-text-center">{{order.menu.price}}</td>
     <td *ngIf="order.status === 'KITCHEN' || order.status === 'RELEASED' " class="uk-text-center">{{order.status}}</td>
     <td *ngIf="order.status === 'READY'" class="uk-text-center uk-alert-danger">{{order.status}}</td>
-    <td class="uk-text-center">{{order.creationDateTime | date: 'yyyy-MM-dd ---- HH:mm'}}</td>
+    <td class="uk-text-center">{{order.creationTime}}</td>
+    <td class="uk-text-center">{{order.tables.numberOfTable}}</td>
     <td>
       <div *ngIf="order.status === 'KITCHEN'" class="uk-button-default uk-disabled uk-button uk-button-small uk-border-rounded uk-width">W toku</div>
       <button (click)="setOrderStatusAsReleased(order.id)" *ngIf="order.status === 'READY' || order.status === 'READY'" class="uk-button-primary uk-button uk-button-small uk-border-rounded uk-width">Zmień status</button>

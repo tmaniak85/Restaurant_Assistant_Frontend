@@ -3,10 +3,10 @@
 <table class="uk-table-striped uk-width">
   <thead>
   <tr>
-    <th class="uk-text-right">Id</th>
-    <th class="uk-text-center">Numer stolika</th>
-    <th class="uk-text-center">Ilość miejsc</th>
-    <th>Akcja</th>
+    <th class="uk-text-right" style="width: 5em">Id</th>
+    <th class="uk-text-center" style="width: 35em">Numer stolika</th>
+    <th class="uk-text-center" style="width: 35em">Ilość miejsc</th>
+    <th class="uk-text-center" style="width: 25em">Akcja</th>
   </tr>
   </thead>
   <tbody>
@@ -22,9 +22,26 @@
   <tfoot>
   <tr>
     <td></td>
-    <td><input [(ngModel)]="table.numberOfTable" class="uk-input uk-border-rounded uk-margin" type="text"></td>
-    <td><input [(ngModel)]="table.numberOfSeats" class="uk-input uk-border-rounded uk-margin" type="text"></td>
+    <td><input [(ngModel)]="table.numberOfTable" class="uk-input uk-border-rounded uk-margin" type="number"></td>
+    <td><input [(ngModel)]="table.numberOfSeats" class="uk-input uk-border-rounded uk-margin" type="number"></td>
     <td><div (click)="createTable()" class="uk-button-primary uk-button uk-button-small uk-border-rounded uk-align-center">Dodaj</div></td>
   </tr>
   </tfoot>
 </table>
+<div *ngIf="tableExistError" uk-alert uk-alert class="uk-alert-danger">
+  <a class="uk-alert-close" uk-close></a>
+  <span class="uk-text-small uk-text-secondary">Stół o podanym numerze już istnieje</span>
+</div>
+<div *ngIf="tableNumberRangeError" uk-alert uk-alert class="uk-alert-danger">
+  <a class="uk-alert-close" uk-close></a>
+  <span class="uk-text-small uk-text-secondary">Numer stolika musi być liczbą z zakresu od 1 do 1000</span>
+</div>
+<div *ngIf="numberOfSeatsRangeError" uk-alert uk-alert class="uk-alert-danger">
+  <a class="uk-alert-close" uk-close></a>
+  <span class="uk-text-small uk-text-secondary">Ilość miejsc musi zawierać się w przedziale od 1 do 50</span>
+</div>
+<div *ngIf="orderInTablesError" uk-alert uk-alert class="uk-alert-danger">
+  <a class="uk-alert-close" uk-close></a>
+  <span class="uk-text-small uk-text-secondary">Stolik aktualnie ma aktywne zamówienia. Obługujący: {{helperMessage}}</span>
+</div>
+<div style="height: 100px"></div>

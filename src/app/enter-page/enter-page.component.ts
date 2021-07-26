@@ -25,6 +25,7 @@ export class EnterPageComponent implements OnInit {
     this.authService.userType = this.user.userAuthority;
     this.router.navigateByUrl(`/MainPage/${userAuthority}`);
   }
+
   logout(): void {
     this.apiHttp.logout();
     this.router.navigate(['']);

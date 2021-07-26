@@ -5,6 +5,9 @@
       <label class="uk-text">Jesteś zalogowany jako: {{user.username}}</label><br>
       <label class="uk-text">Uprawnienia: {{user.userAuthority}}</label>
     </div>
-    <div  (click)="goFurther(user.userAuthority)" class="uk-button-primary uk-button uk-button-small uk-border-rounded uk-align-center">Dalej</div>
+    <div  (keyup.enter)="goFurther(user.userAuthority)" (click)="goFurther(user.userAuthority)"
+          class="uk-button-primary uk-button uk-button-small uk-border-rounded uk-align-center">Dalej</div>
+    <div class="uk-height-small">
+    </div>
   </div>
 </div>

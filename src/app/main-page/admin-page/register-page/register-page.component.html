@@ -3,13 +3,13 @@
 <table class="uk-table-striped uk-width">
   <thead>
   <tr>
-    <th class="uk-text-right">Id</th>
-    <th class="uk-text-center">Login</th>
-    <th>Hasło</th>
-    <th class="uk-text-center">Imię</th>
-    <th class="uk-text-center">Nazwisko</th>
-    <th class="uk-text-center">Stanowisko</th>
-    <th>Akcja</th>
+    <th class="uk-text-right" style="width: 5em">Id</th>
+    <th class="uk-text-center" style="width: 20em">Login</th>
+    <th class="uk-text-center" style="width: 15em">Hasło</th>
+    <th class="uk-text-center" style="width: 15em">Imię</th>
+    <th class="uk-text-center" style="width: 15em">Nazwisko</th>
+    <th class="uk-text-center" style="width: 15em">Stanowisko</th>
+    <th class="uk-text-center" style="width: 15em">Akcja</th>
   </tr>
   </thead>
   <tbody>
@@ -23,7 +23,8 @@
     <td class="uk-text-center">{{credential.lastName}}</td>
     <td class="uk-text-center">{{credential.userAuthority}}</td>
     <td>
-      <button (click)="deleteUser(credential.id)" class="uk-button-primary uk-button uk-button-small uk-border-rounded">Usuń konto</button>
+      <button *ngIf="credential.username != 'ADMIN'" (click)="setUserAsNonActive(credential.id)" class="uk-button-primary uk-button uk-button-small uk-border-rounded">Usuń konto</button>
+      <button *ngIf="credential.username === 'ADMIN'" (click)="deleteAdminUser(credential.id)" class="uk-button-primary uk-button uk-button-small uk-border-rounded">Usuń konto</button>
     </td>
   </tr>
   </tbody>
@@ -31,7 +32,7 @@
   <tr>
     <td></td>
     <td><input [(ngModel)]="credential.username" class="uk-input uk-border-rounded uk-margin" type="text"></td>
-    <td><input [(ngModel)]="credential.password" class="uk-input uk-border-rounded uk-margin" type="text"></td>
+    <td><input [(ngModel)]="credential.password" class="uk-input uk-border-rounded uk-margin" type="password"></td>
     <td><input [(ngModel)]="credential.firstName" class="uk-input uk-border-rounded uk-margin" type="text"></td>
     <td><input [(ngModel)]="credential.lastName" class="uk-input uk-border-rounded uk-margin" type="text"></td>
     <td>
@@ -45,4 +46,31 @@
   </tr>
   </tfoot>
 </table>
+<div>
+  <div *ngIf="usernameSizeError" uk-alert class="uk-alert-danger">
+    <a class="uk-alert-close" uk-close></a>
+    <p class="uk-text-small uk-text-secondary">Nazwa użytkownika powinna mieć długość od 3 do 16 znaków</p>
+  </div>
+  <div *ngIf="usernameExistError" uk-alert class="uk-alert-danger">
+    <a class="uk-alert-close" uk-close></a>
+    <span class="uk-text-small uk-text-secondary">Podana nazwa użytkownika jest już zajęta</span>
+  </div>
+  <div *ngIf="passwordSizeError" uk-alert class="uk-alert-danger">
+    <a class="uk-alert-close" uk-close></a>
+    <span class="uk-text-small uk-text-secondary">Hasło powinno mieć długość od 8 do 30 znaków</span>
+  </div>
+  <div *ngIf="userAuthorityError" uk-alert class="uk-alert-danger">
+    <a class="uk-alert-close" uk-close></a>
+    <span class="uk-text-small uk-text-secondary">Wybierz stanowisko</span>
+  </div>
+  <div *ngIf="tableInUserExistError" uk-alert class="uk-alert-danger">
+    <a class="uk-alert-close" uk-close></a>
+    <span class="uk-text-small uk-text-secondary">Kelner aktualnie jest w trakcie osbługi stolika</span>
+  </div>
+</div>
+<div *ngIf="forbiddenDeleteOfCurrentAccount" uk-alert class="uk-alert-danger">
+  <a class="uk-alert-close" uk-close></a>
+  <span class="uk-text-small uk-text-secondary">Nie możesz usunąć konta, na którym jesteś obecnie zalogowany/zalogowana</span>
+</div>
+<div style="height: 100px"></div>
 

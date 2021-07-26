@@ -3,11 +3,11 @@
 <table class="uk-table-striped uk-width">
   <thead>
     <tr>
-      <th class="uk-text-right">Id</th>
-      <th class="uk-text-center">Nazwa</th>
-      <th class="uk-text-center">Cena</th>
-      <th class="uk-text-center">Status</th>
-      <th class="uk-text-center">Akcja</th>
+      <th class="uk-text-right" style="width: 5em">Id</th>
+      <th class="uk-text-center" style="width: 60em">Nazwa</th>
+      <th class="uk-text-center" style="width: 10em">Cena</th>
+      <th class="uk-text-center" style="width: 15em">Status</th>
+      <th class="uk-text-center" style="width: 15em">Akcja</th>
     </tr>
   </thead>
   <tbody>
@@ -28,7 +28,7 @@
   <tr>
     <td></td>
     <td><input [(ngModel)]="dish.name" class="uk-input uk-border-rounded uk-margin" type="text"></td>
-    <td><input [(ngModel)]="dish.price" class="uk-input uk-border-rounded uk-margin" type="text"></td>
+    <td><input [(ngModel)]="dish.price" class="uk-input uk-border-rounded uk-margin" type="number"></td>
     <td>
       <select [(ngModel)]="dish.status" class="uk-select uk-border-rounded uk-margin">
         <option>true</option>
@@ -39,4 +39,18 @@
   </tr>
   </tfoot>
 </table>
+<div *ngIf="dishNameSizeError" uk-alert uk-alert class="uk-alert-danger">
+  <a class="uk-alert-close" uk-close></a>
+  <p class="uk-text-small uk-text-secondary">Nazwa dania powinna mieć długość od 3 do 16 znaków</p>
+</div>
+<div *ngIf="priceFieldNull" uk-alert uk-alert class="uk-alert-danger">
+  <a class="uk-alert-close" uk-close></a>
+  <p class="uk-text-small uk-text-secondary">Kwota powinna być liczbą z zakresu od 0 do 1000</p>
+</div>
+<div *ngIf="priceRangeError" uk-alert uk-alert class="uk-alert-danger">
+  <a class="uk-alert-close" uk-close></a>
+  <p class="uk-text-small uk-text-secondary">Kwota powinna być liczbą z zakresu od 0 do 1000</p>
+</div>
+<div style="height: 100px"></div>
+
 

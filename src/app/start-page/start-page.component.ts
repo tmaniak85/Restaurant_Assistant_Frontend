@@ -10,19 +10,28 @@ import {UserCredentials} from '../domain/UserCredentials';
 })
 export class StartPageComponent implements OnInit {
   credentials: UserCredentials = new UserCredentials();
+  wrongCredentialsError = false;
 
 
   constructor(private apiHttp: ApiHttpService, private router: Router) {
   }
 
   ngOnInit(): void {
-    // localStorage.clear();
   }
 
   userLogin(): void {
+    this.wrongCredentialsError = false;
     this.apiHttp.userLogin(this.credentials).subscribe(
       () => {
         this.router.navigate(['/Enter']);
+      },
+      e => {
+        const errors = e.error.validationErrorList;
+        for (const error of errors) {
+          if (error.code === 'C003') {
+            this.wrongCredentialsError = true;
+          }
+        }
       }
     );
   }

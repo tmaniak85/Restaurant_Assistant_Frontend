@@ -1,0 +1,104 @@
+<div style="height: 100px"></div>
+<div class="uk-flex uk-container-expand">
+  <div class="uk-container uk-width-1-2">
+    <div class="uk-container-small uk-background-blend-default">
+      <div class="uk-heading-small uk-heading-divider uk-head uk-text-center">Kelnerzy</div>
+      <div style="height: 30px" class="uk-width">
+        <div *ngIf="noDateForUserStatError" uk-alert class="uk-alert-danger">
+          <a class="uk-alert-close" uk-close></a>
+          <span class="uk-text-small uk-text-secondary">Wprowadź poprawnie daty</span>
+        </div>
+      </div>
+      <table class="uk-table-striped uk-width-expand">
+        <thead>
+        <tr>
+          <th class="uk-text-center">Data od:</th>
+          <th class="uk-text-center">Data do:</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+          <td class="uk-text-center">
+            <input [(ngModel)]="datesForUserStat.dateFrom" class="uk-input uk-border-rounded" type="date">
+          </td>
+          <td class="uk-text-center">
+            <input [(ngModel)]="datesForUserStat.dateTo" class="uk-input uk-border-rounded" type="date">
+          </td>
+          <td>
+            <div (click)="showOrdersBetweenDatesForUser()" class="uk-button-primary uk-button uk-button-small uk-border-rounded">Pokaż</div>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+      <table class="uk-table-striped uk-width-expand">
+        <thead>
+        <tr>
+          <th class="uk-text-center" style="width: 5em">Id</th>
+          <th class="uk-text-center" style="width: 50em">Kelner</th>
+          <th class="uk-text-center" style="width: 45em">Ilość zamówień</th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let credential of credentials" style="counter-increment: rowNumber">
+        <tr>
+          <td class="uk-text-center" scope="row"></td>
+          <td class="uk-text-center">{{credential.username}}</td>
+          <div *ngIf="ordersForUserStat.length === 0" class="uk-text-center"></div>
+          <div *ngIf="ordersForUserStat.length != 0" class="uk-text-center">{{countNumberOfOrdersForUser(credential.username)}}</div>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="uk-container uk-width-1-2">
+    <div class="uk-container-small uk-background-blend-default">
+      <div class="uk-heading-small uk-heading-divider uk-head uk-text-center">Dania</div>
+      <div style="height: 30px">
+        <div *ngIf="noDateForDishesStatError" uk-alert class="uk-alert-danger">
+          <a class="uk-alert-close" uk-close></a>
+          <span class="uk-text-small uk-text-secondary">Wprowadź poprawnie daty</span>
+        </div>
+      </div>
+      <table class="uk-table-striped uk-width-expand">
+        <thead>
+        <tr>
+          <th class="uk-text-center">Data od:</th>
+          <th class="uk-text-center">Data do:</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+          <td class="uk-text-center">
+            <input [(ngModel)]="datesForDishesStat.dateFrom" class="uk-input uk-border-rounded" type="date">
+          </td>
+          <td class="uk-text-center">
+            <input [(ngModel)]="datesForDishesStat.dateTo" class="uk-input uk-border-rounded" type="date">
+          </td>
+          <td>
+            <div (click)="showOrdersBetweenDatesForDishes()" class="uk-button-primary uk-button uk-button-small uk-border-rounded">Pokaż</div>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+      <table class="uk-table-striped uk-width-expand">
+        <thead>
+        <tr>
+          <th class="uk-text-right" style="width: 5em">Id</th>
+          <th class="uk-text-center" style="width: 65em">Danie</th>
+          <th class="uk-text-center" style="width: 15em">Data wprowadzenia</th>
+          <th class="uk-text-center" style="width: 15em">Ilość zamówień</th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let dish of menu" style="counter-increment: rowNumber">
+        <tr>
+          <td class="uk-text-center" scope="row"></td>
+          <td class="uk-text-center">{{dish.name}}</td>
+          <td class="uk-text-center">{{dish.creationDate}}</td>
+          <div *ngIf="ordersForDishesStat.length === 0" class="uk-text-center"></div>
+          <div *ngIf="ordersForDishesStat.length != 0" class="uk-text-center">{{countNumberOfOrdersForDishes(dish.name)}}</div>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div style="height: 100px"></div>

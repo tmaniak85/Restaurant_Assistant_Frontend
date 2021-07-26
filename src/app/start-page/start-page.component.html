@@ -3,10 +3,17 @@
     <div class="uk-heading-small uk-heading-divider uk-head uk-text-center">Restaurant Assistant</div>
     <div class="uk-margin">
       <label>Login</label>
-      <input [(ngModel)]="credentials.username" class="uk-input uk-border-rounded" type="text">
+      <input [(ngModel)]="credentials.username" (keydown.enter)="userLogin()" class="uk-input uk-border-rounded" type="text">
       <label>Hasło</label>
-      <input [(ngModel)]="credentials.password" class="uk-input uk-border-rounded" type="text">
+      <input [(ngModel)]="credentials.password" (keydown.enter)="userLogin()" class="uk-input uk-border-rounded" type="password">
     </div>
     <div  (click)="userLogin()" class="uk-button-primary uk-button uk-button-small uk-border-rounded uk-align-center">Zaloguj</div>
+    <div class="uk-height-small">
+      <div *ngIf="wrongCredentialsError" uk-alert uk-alert class="uk-alert-danger">
+        <a class="uk-alert-close" uk-close></a>
+        <span class="uk-text-small uk-text-secondary">Podane dane są nieprawidłowe</span>
+      </div>
+    </div>
   </div>
 </div>
+

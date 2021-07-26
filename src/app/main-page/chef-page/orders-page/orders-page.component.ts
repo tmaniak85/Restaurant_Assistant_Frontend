@@ -5,7 +5,6 @@ import {Order} from '../../../domain/Order';
 import {Subscription, timer} from 'rxjs';
 import {mergeMap} from 'rxjs/operators';
 import {Menu} from '../../../domain/Menu';
-import Table = WebAssembly.Table;
 import {Tables} from '../../../domain/Tables';
 
 @Component({
@@ -23,7 +22,7 @@ export class OrdersPageComponent implements OnInit, OnDestroy {
   constructor(private apiHttp: ApiHttpService, private router: Router) { }
 
   ngOnInit(): void {
-    this.subscription = timer (0, 1000)
+    this.subscription = timer (0, 2000)
       .pipe(mergeMap(
         () => this.apiHttp.showOrdersWithKitchenStatus()
       )).subscribe(
@@ -33,6 +32,7 @@ export class OrdersPageComponent implements OnInit, OnDestroy {
   changeStatus(orderId: number): void {
     this.apiHttp.setOrderStatusAsReady(orderId).subscribe();
   }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

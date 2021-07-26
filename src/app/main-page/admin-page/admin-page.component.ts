@@ -15,7 +15,8 @@ export class AdminPageComponent implements OnInit {
   }
 
   logout(): void {
-    this.apiHttp.logout();
-    this.router.navigate(['']);
+    this.apiHttp.logout().subscribe(
+      () => this.router.navigate([''])
+    );
   }
 }

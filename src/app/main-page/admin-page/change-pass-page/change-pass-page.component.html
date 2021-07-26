@@ -9,10 +9,16 @@
   </thead>
   <tbody>
   <tr>
-    <td><input [(ngModel)]="user.password" class="uk-input uk-border-rounded uk-margin" type="text"></td>
+    <td><input [(ngModel)]="user.password" class="uk-input uk-border-rounded uk-margin" type="password"></td>
     <td><div (click)="changePassword()" class="uk-button-primary uk-button uk-button-small uk-border-rounded uk-align-center">Zatwierdź</div></td>
   </tr>
   </tbody>
 </table>
-<div div class="uk-card-footer uk-position-bottom uk-background-muted" style="height: 50px">
+<div>
+  <div *ngIf="passwordSizeError" uk-alert uk-alert class="uk-alert-danger">
+    <a class="uk-alert-close" uk-close></a>
+    <p class="uk-text-small uk-text-secondary">Hasło powinno mieć długość od 8 do 30 znaków</p>
+  </div>
 </div>
+<div style="height: 100px"></div>
+

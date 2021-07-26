@@ -21,5 +21,4 @@ export class HeaderPageComponent implements OnInit {
       r => this.credentials = r
     );
   }
-
 }

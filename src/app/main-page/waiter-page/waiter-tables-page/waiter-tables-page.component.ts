@@ -18,6 +18,7 @@ export class WaiterTablesPageComponent implements OnInit, OnDestroy {
   table: Tables = new Tables();
   introducedTable: Tables = new Tables();
   tableId: number;
+  activeOrdersInTableError = false;
 
   constructor(private apiHttp: ApiHttpService, private router: Router) { }
 
@@ -35,18 +36,31 @@ export class WaiterTablesPageComponent implements OnInit, OnDestroy {
       r => this.user = r
     );
   }
+
   setTableId(tableId: number): void {
     this.tableId = tableId;
   }
+
   setTableStatusAsOrder(tableId: number): void {
     this.apiHttp.setTableStatusAsOrder(this.tableId).subscribe();
   }
+
   setTableStatusAsFree(tableId: number): void {
-    this.apiHttp.setTableStatusAsFree(this.tableId).subscribe();
+    this.activeOrdersInTableError = false;
+    this.apiHttp.setTableStatusAsFree(this.tableId).subscribe(
+      () => this.router.navigateByUrl('/MainPage/WAITER/Tables'),
+      e => {
+        const errors = e.error.validationErrorList;
+        for (const error of errors) {
+          if (error.code === 'C001') {
+            this.activeOrdersInTableError = true;
+          }
+        }
+      }
+    );
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 }

@@ -16,6 +16,7 @@ import {EnterPageComponent} from './enter-page/enter-page.component';
 import {CustomerTakeOrderPageComponent} from './main-page/waiter-page/waiter-tables-page/customer-take-order-page/customer-take-order-page.component';
 import {OrdersPageComponent} from './main-page/chef-page/orders-page/orders-page.component';
 import {CustomerShowOrdersPageComponent} from './main-page/waiter-page/waiter-tables-page/customer-show-orders-page/customer-show-orders-page.component';
+import {StatPageComponent} from './main-page/admin-page/stat-page/stat-page.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
       {path: 'ADMIN', data: { canActivate: 'ADMIN'}, canActivate: [AuthGuard], component: AdminPageComponent, children: [
           {path: 'Register', canActivate: [AuthGuard], data: { canActivate: 'ADMIN'}, component: RegisterPageComponent},
           {path: 'Pass/:Id', canActivate: [AuthGuard], data: { canActivate: 'ADMIN'}, component: ChangePassPageComponent},
+          {path: 'Stat', canActivate: [AuthGuard], data: { canActivate: 'ADMIN'}, component: StatPageComponent},
           {path: 'Tables', canActivate: [AuthGuard], data: { canActivate: 'ADMIN'}, component: TablesPageComponent},
           {path: 'Room', canActivate: [AuthGuard], data: { canActivate: 'ADMIN'}, component: DiningRoomPageComponent}
           ]},

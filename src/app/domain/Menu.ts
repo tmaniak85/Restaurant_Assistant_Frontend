@@ -3,4 +3,5 @@ export class Menu {
   name: string;
   status: boolean;
   price: number;
+  creationDate: Date;
 }
