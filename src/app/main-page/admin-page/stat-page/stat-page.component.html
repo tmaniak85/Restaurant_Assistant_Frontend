@@ -42,7 +42,7 @@
         <tr>
           <td class="uk-text-center" scope="row"></td>
           <td class="uk-text-center">{{credential.username}}</td>
-          <div *ngIf="ordersForUserStat.length === 0" class="uk-text-center"></div>
+          <div *ngIf="ordersForUserStat.length === 0" class="uk-text-center">0</div>
           <div *ngIf="ordersForUserStat.length != 0" class="uk-text-center">{{countNumberOfOrdersForUser(credential.username)}}</div>
         </tr>
         </tbody>
