@@ -93,7 +93,7 @@
           <td class="uk-text-center" scope="row"></td>
           <td class="uk-text-center">{{dish.name}}</td>
           <td class="uk-text-center">{{dish.creationDate}}</td>
-          <div *ngIf="ordersForDishesStat.length === 0" class="uk-text-center"></div>
+          <div *ngIf="ordersForDishesStat.length === 0" class="uk-text-center">0</div>
           <div *ngIf="ordersForDishesStat.length != 0" class="uk-text-center">{{countNumberOfOrdersForDishes(dish.name)}}</div>
         </tr>
         </tbody>
